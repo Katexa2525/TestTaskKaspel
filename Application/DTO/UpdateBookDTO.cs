@@ -1,15 +1,11 @@
-﻿namespace Domain.Models
+﻿namespace Application.DTO
 {
-  public class Book
+  public class UpdateBookDTO
   {
-    public Guid Id { get; set; }
     public string ISBN { get; set; }
     public string Name { get; set; }
     public string Jenre { get; set; }
     public string Author { get; set; }
     public DateTime Year { get; set; }
-
-    public Guid OrderId { get; set; } // Внешний ключ
-    public Order Order { get; set; }
   }
 }

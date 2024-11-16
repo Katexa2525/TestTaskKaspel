@@ -15,7 +15,7 @@ namespace Application.Service
       _repository = repository;
     }
 
-    public async Task<BookDTO> CreateBook(CreateUpdateBookDTO createBook, bool trackchanges)
+    public async Task<BookDTO> CreateBook(CreateBookDTO createBook, bool trackchanges)
     {
       var book = createBook.Adapt<Book>();
       _repository.Book.CreateBook(book);
@@ -48,11 +48,11 @@ namespace Application.Service
       return book.Adapt<BookDTO>();
     }
 
-    public async Task UpdateBook(Guid id, CreateUpdateBookDTO updateBook, bool trackChanges)
+    public async Task UpdateBook(Guid Id, UpdateBookDTO updateBook, bool trackChanges)
     {
-      var book = await _repository.Book.GetBookById(id, trackChanges);
+      var book = await _repository.Book.GetBookById(Id, trackChanges);
       if (book == null)
-        throw new KeyNotFoundException($"Book with id {id} not found.");
+        throw new KeyNotFoundException($"Book with id {Id} not found.");
       updateBook.Adapt(book);
       _repository.Book.UpdateBook(book);
       await _repository.SaveAsync();

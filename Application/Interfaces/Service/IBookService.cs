@@ -6,8 +6,8 @@ namespace Application.Interfaces.Service
   {
     Task<IEnumerable<BookDTO>> GetAllBooks(bool trackChanges);
     Task<BookDTO> GetBookById(Guid Id, bool trackChanges);
-    Task<BookDTO> CreateBook(CreateUpdateBookDTO createBook, bool trackchanges);
+    Task<BookDTO> CreateBook(CreateBookDTO createBook, bool trackchanges);
     Task DeleteBook(Guid Id, bool trackChanges);
-    Task UpdateBook(Guid id, CreateUpdateBookDTO updateBook, bool trackChanges);
+    Task UpdateBook(Guid Id, UpdateBookDTO updateBook, bool trackChanges);
   }
 }

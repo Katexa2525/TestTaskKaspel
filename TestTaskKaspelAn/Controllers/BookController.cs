@@ -29,7 +29,7 @@ namespace TestTaskKaspelAn.Controllers
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateBook([FromBody] CreateUpdateBookDTO createBook, bool trackChanges = false)
+    public async Task<IActionResult> CreateBook([FromBody] CreateBookDTO createBook, bool trackChanges = false)
     {
       var createdBook = await _serviceManager.BookService.CreateBook(createBook, trackChanges);
       return CreatedAtAction(nameof(GetBookById), new { id = createdBook.Id }, createdBook);
@@ -43,7 +43,7 @@ namespace TestTaskKaspelAn.Controllers
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateBook(Guid Id, [FromBody] CreateUpdateBookDTO updateBook)
+    public async Task<IActionResult> UpdateBook(Guid Id, [FromBody] UpdateBookDTO updateBook)
     {
       if (updateBook == null)
         return BadRequest("Book data is null.");

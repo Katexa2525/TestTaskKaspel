@@ -11,6 +11,13 @@ namespace Infrastructure
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+      base.OnModelCreating(modelBuilder);
+
+      modelBuilder.Entity<Order>()
+          .HasMany(o => o.Books)
+          .WithOne(b => b.Order)
+          .HasForeignKey(b => b.OrderId)
+          .OnDelete(DeleteBehavior.Cascade);
     }
 
     public DbSet<Book>? Books { get; set; }
