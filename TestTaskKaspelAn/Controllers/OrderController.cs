@@ -35,18 +35,16 @@ namespace TestTaskKaspelAn.Controllers
       return CreatedAtRoute("GetOrderById", new { id = createdOrder.Id }, createdOrder);
     }
 
-    // Обновить заказ
     [HttpPut("{Id:guid}")]
     public async Task<IActionResult> UpdateOrder(Guid Id, [FromBody] UpdateOrderDTO updateOrder)
     {
-      if (updateOrder == null)
-        return BadRequest("OrderForUpdateDTO is null.");
+      //if (updateOrder == null)
+      //  return BadRequest("UpdateOrderDTO is null.");
 
       await _serviceManager.OrderService.UpdateOrder(Id, updateOrder, trackChanges: true);
       return NoContent();
     }
 
-    // Удалить заказ
     [HttpDelete("{Id:guid}")]
     public async Task<IActionResult> DeleteOrder(Guid Id)
     {

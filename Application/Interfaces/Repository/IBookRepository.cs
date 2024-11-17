@@ -9,5 +9,7 @@ namespace Application.Interfaces.Repository
     void DeleteBook(Book book);
     void CreateBook(Book book);
     void UpdateBook(Book book);
+    void CreateBookForOrder(Guid orderId, Book book);
+    Task<Book> GetBookByOrderIdBookId(Guid orderId, Guid bookId, bool trackChanges);
   }
 }

@@ -28,5 +28,14 @@ namespace Infrastructure.Repository
     public async Task<IEnumerable<Book>> GetAllBooks(bool trackChanges) => await FindAll(trackChanges).OrderBy(c=>c.Name).ToListAsync();
 
     public async Task<Book> GetBookById(Guid Id, bool trackChanges) => await FindByCondition(book => book.Id.Equals(Id), trackChanges).SingleOrDefaultAsync();
+
+    public void CreateBookForOrder(Guid orderId, Book book)
+    {
+      book.OrderId = orderId; // связь
+      Create(book);
+    }
+
+    public async Task<Book> GetBookByOrderIdBookId(Guid orderId, Guid bookId, bool trackChanges) =>
+        await FindByCondition(b => b.OrderId == orderId && b.Id == bookId, trackChanges).SingleOrDefaultAsync();
   }
 }
