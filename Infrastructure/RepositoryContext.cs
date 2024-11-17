@@ -1,5 +1,6 @@
 ﻿using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Infrastructure
 {
@@ -7,6 +8,7 @@ namespace Infrastructure
   {
     public RepositoryContext(DbContextOptions options) : base(options)
     {
+      //Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
