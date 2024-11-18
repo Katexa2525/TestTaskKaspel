@@ -45,35 +45,8 @@ namespace TestTaskKaspelAn.Controllers
     [HttpPut("{Id}")]
     public async Task<IActionResult> UpdateBook(Guid Id, [FromBody] UpdateBookDTO updateBook)
     {
-      //if (updateBook == null)
-      //  return BadRequest("Book data is null.");
       await _serviceManager.BookService.UpdateBook(Id, updateBook, trackChanges: true);
       return NoContent();
     }
-
-    //[HttpPost("{orderId}")]
-    //public async Task<IActionResult> CreateBookForOrder(Guid orderId, [FromBody] CreateBookDTO createBook)
-    //{
-    //  //if (createBook == null)
-    //  //  return BadRequest("BookForCreationDTO object is null.");
-    //  var createdBook = await _serviceManager.BookService.CreateBookForOrder(orderId, createBook);
-    //  return CreatedAtRoute("GetBookByIdForOrder", new { orderId = orderId, bookId = createdBook.Id }, createdBook);
-    //}
-
-    //[HttpDelete("{orderId:Guid}/{bookId:Guid}")]
-    //public async Task<IActionResult> DeleteBookForOrder(Guid orderId, Guid bookId)
-    //{
-    //  await _serviceManager.BookService.DeleteBookForOrder(orderId, bookId);
-    //  return NoContent();
-    //}
-
-    //[HttpPut("{orderId:Guid}/{bookId:Guid}")]
-    //public async Task<IActionResult> UpdateBookForOrder(Guid orderId, Guid bookId, [FromBody] UpdateBookDTO updateBook)
-    //{
-    //  //if (updateBook == null)
-    //  //  return BadRequest("UpdateBookDTO object is null.");
-    //  var updatedBook = await _serviceManager.BookService.UpdateBookForOrder(orderId, bookId, updateBook);
-    //  return Ok(updatedBook);
-    //}
   }
 }

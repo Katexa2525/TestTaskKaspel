@@ -38,9 +38,6 @@ namespace TestTaskKaspelAn.Controllers
     [HttpPut("{Id:guid}")]
     public async Task<IActionResult> UpdateOrder(Guid Id, [FromBody] UpdateOrderDTO updateOrder)
     {
-      //if (updateOrder == null)
-      //  return BadRequest("UpdateOrderDTO is null.");
-
       await _serviceManager.OrderService.UpdateOrder(Id, updateOrder, trackChanges: true);
       return NoContent();
     }

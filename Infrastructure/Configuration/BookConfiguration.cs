@@ -18,7 +18,6 @@ namespace Infrastructure.Configuration
         Author = "Gaiman Neil",
         Jenre = "Fentasy",
         Year = 2017,
-        //OrderId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a")
       },
       new Book
       {
@@ -28,7 +27,6 @@ namespace Infrastructure.Configuration
         Author = "Хокинс Джефф",
         Jenre = "Science",
         Year = 2015,
-        //OrderId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a")
       }
       );
     }

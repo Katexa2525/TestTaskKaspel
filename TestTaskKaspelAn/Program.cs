@@ -20,9 +20,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// этот класс создан согласно последнему условию по обработке ошибок IExceptionHandler
-//builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
-
 var app = builder.Build();
 // обработчик ошибок с помощью RequstDelegat
 app.UseExceptionHandlerMiddleware();
