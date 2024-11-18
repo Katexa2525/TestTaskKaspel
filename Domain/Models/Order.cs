@@ -8,6 +8,6 @@
     public DateTime OrderDate { get; set; }
 
 
-    public ICollection<Book> Books { get; set; }
+    public ICollection<OrdBook> OrdBooks { get; set; }
   }
 }

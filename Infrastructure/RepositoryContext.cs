@@ -14,18 +14,25 @@ namespace Infrastructure
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       modelBuilder.Entity<Order>()
-          .HasMany(o => o.Books)
-          .WithOne(b => b.Order)
+          .HasMany(o => o.OrdBooks)
+          .WithOne()
           .HasForeignKey(b => b.OrderId)
           .OnDelete(DeleteBehavior.Cascade);
 
+      //modelBuilder.Entity<Book>()
+      //   .HasMany(o => o.OrdBooks)
+      //   .WithOne()
+      //   .HasForeignKey(b => b.BookId);
+
       modelBuilder.ApplyConfiguration(new BookConfiguration());
       modelBuilder.ApplyConfiguration(new OrderConfiguration());
+      modelBuilder.ApplyConfiguration(new OrdBookConfiguration());
 
       base.OnModelCreating(modelBuilder);
     }
 
     public DbSet<Book>? Books { get; set; }
     public DbSet<Order>? Orders { get; set; }
+    public DbSet<OrdBook>? OrdBooks { get; set; }
   }
 }

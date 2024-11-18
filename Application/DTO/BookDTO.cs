@@ -8,6 +8,6 @@
     public string Jenre { get; set; }
     public string Author { get; set; }
     public int Year { get; set; }
-    public Guid OrderId { get; set; }
+    //public Guid OrderId { get; set; }
   }
 }

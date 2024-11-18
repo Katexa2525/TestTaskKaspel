@@ -7,6 +7,6 @@
     public int Number { get; set; }
     public DateTime OrderDate { get; set; }
 
-    public IEnumerable<BookDTO> Books { get; set; }
+    public IEnumerable<OrdBookDTO> OrdBooks { get; set; }
   }
 }

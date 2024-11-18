@@ -22,7 +22,7 @@ namespace Infrastructure.Repository
 
     public async Task<IEnumerable<Order>> GetAllOrders(string? name, DateTime? orderDate, bool trackChanges)
     {
-      var query = (IQueryable<Order>)FindAll(trackChanges).Include(order => order.Books);
+      var query = (IQueryable<Order>)FindAll(trackChanges).Include(order => order.OrdBooks);
       if (!string.IsNullOrWhiteSpace(name))
       {
         query = query.Where(order => order.Name.Contains(name));
@@ -36,7 +36,7 @@ namespace Infrastructure.Repository
 
     public async Task<Order> GetOrderById(Guid Id, bool trackChanges)
     {
-      return await FindByCondition(o => o.Id == Id, trackChanges).Include(o => o.Books).SingleOrDefaultAsync();
+      return await FindByCondition(o => o.Id == Id, trackChanges).Include(o => o.OrdBooks).SingleOrDefaultAsync();
     }
 
     public void UpdateOrder(Order order)

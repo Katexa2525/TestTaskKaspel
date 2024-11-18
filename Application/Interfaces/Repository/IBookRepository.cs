@@ -9,8 +9,8 @@ namespace Application.Interfaces.Repository
     void DeleteBook(Book book);
     void CreateBook(Book book);
     void UpdateBook(Book book);
-    void CreateBookForOrder(Guid orderId, Book book);
-    Task<Book> GetBookByOrderIdBookId(Guid orderId, Guid bookId, bool trackChanges);
+    //void CreateBookForOrder(Guid orderId, Book book);
+    //Task<Book> GetBookByOrderIdBookId(Guid orderId, Guid bookId, bool trackChanges);
     Task<IEnumerable<Book>> GetBooksByIds(IEnumerable<Guid> bookIds, bool trackChanges);
   }
 }

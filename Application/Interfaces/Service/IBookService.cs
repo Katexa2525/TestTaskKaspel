@@ -9,8 +9,8 @@ namespace Application.Interfaces.Service
     Task<BookDTO> CreateBook(CreateBookDTO createBook, bool trackChanges);
     Task DeleteBook(Guid Id, bool trackChanges);
     Task UpdateBook(Guid Id, UpdateBookDTO updateBook, bool trackChanges);
-    Task<BookDTO> CreateBookForOrder(Guid orderId, CreateBookDTO createBook);
-    Task<BookDTO> UpdateBookForOrder(Guid orderId, Guid bookId, UpdateBookDTO updateBook);
-    Task DeleteBookForOrder(Guid orderId, Guid bookId);
+    //Task<BookDTO> CreateBookForOrder(Guid orderId, CreateBookDTO createBook);
+    //Task<BookDTO> UpdateBookForOrder(Guid orderId, Guid bookId, UpdateBookDTO updateBook);
+    //Task DeleteBookForOrder(Guid orderId, Guid bookId);
   }
 }

@@ -17,7 +17,7 @@ namespace Application.Validation
       RuleFor(order => order.OrderDate)
           .LessThanOrEqualTo(DateTime.Now).WithMessage("Order date must not be in the future.");
 
-      RuleFor(order => order.Books)
+      RuleFor(order => order.OrdBooks)
           .NotNull().WithMessage("Books collection cannot be null.")
           .Must(books => books.Count > 0).WithMessage("An order must contain at least one book.");
     }

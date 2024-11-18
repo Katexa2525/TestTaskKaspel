@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20241118112554_DatabaseCreation")]
-    partial class DatabaseCreation
+    [Migration("20241118205357_InitialData")]
+    partial class InitialData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,15 +44,10 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("char(36)");
-
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Books");
 
@@ -64,7 +59,6 @@ namespace Infrastructure.Migrations
                             ISBN = "978-1-4722-3435-3",
                             Jenre = "Fentasy",
                             Name = "Neil Gaiman: Neverwhere. The Illustrated Edition",
-                            OrderId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
                             Year = 2017
                         },
                         new
@@ -74,8 +68,40 @@ namespace Infrastructure.Migrations
                             ISBN = "978-5-907473-58-4",
                             Jenre = "Science",
                             Name = "Джефф Хокинс: 1000 мозгов. Новая теория интеллекта.",
-                            OrderId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
                             Year = 2015
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Models.OrdBook", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("BookId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrdBooks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
+                            BookId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
+                            OrderId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a")
+                        },
+                        new
+                        {
+                            Id = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3"),
+                            BookId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3"),
+                            OrderId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a")
                         });
                 });
 
@@ -105,24 +131,22 @@ namespace Infrastructure.Migrations
                             Id = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
                             Name = "1 Заказ",
                             Number = 2,
-                            OrderDate = new DateTime(2024, 11, 18, 14, 25, 54, 853, DateTimeKind.Local).AddTicks(8016)
+                            OrderDate = new DateTime(2024, 11, 18, 23, 53, 57, 584, DateTimeKind.Local).AddTicks(4677)
                         });
                 });
 
-            modelBuilder.Entity("Domain.Models.Book", b =>
+            modelBuilder.Entity("Domain.Models.OrdBook", b =>
                 {
-                    b.HasOne("Domain.Models.Order", "Order")
-                        .WithMany("Books")
+                    b.HasOne("Domain.Models.Order", null)
+                        .WithMany("OrdBooks")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Domain.Models.Order", b =>
                 {
-                    b.Navigation("Books");
+                    b.Navigation("OrdBooks");
                 });
 #pragma warning restore 612, 618
         }

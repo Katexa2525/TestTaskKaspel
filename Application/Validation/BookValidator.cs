@@ -27,8 +27,8 @@ namespace Application.Validation
             .InclusiveBetween(1500, DateTime.Now.Year)
             .WithMessage($"Year must be between 1500 and {DateTime.Now.Year}.");
 
-      RuleFor(book => book.OrderId)
-          .NotEmpty().WithMessage("Order ID is required.");
+      //RuleFor(book => book.OrderId)
+      //    .NotEmpty().WithMessage("Order ID is required.");
     }
   }
 }

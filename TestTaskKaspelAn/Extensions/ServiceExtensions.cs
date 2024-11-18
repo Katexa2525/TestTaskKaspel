@@ -46,6 +46,8 @@ namespace TestTaskKaspelAn.Extensions
       services.AddScoped<IValidator<CreateOrderDTO>, CreateOrderValidator>();
       services.AddScoped<IValidator<UpdateBookDTO>, UpdateBookValidator>();
       services.AddScoped<IValidator<UpdateOrderDTO>, UpdateOrderValidator>();
+      services.AddScoped<IValidator<OrdBookDTO>, OrdBookDTOValidator>();
+      services.AddScoped<IValidator<OrdBook>, OrdBookValidator>();
     }
 
   }

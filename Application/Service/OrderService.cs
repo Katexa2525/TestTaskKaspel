@@ -3,7 +3,6 @@ using Application.Interfaces.Repository;
 using Application.Interfaces.Service;
 using Domain.Models;
 using Mapster;
-using System.Xml.Linq;
 
 namespace Application.Service
 {
@@ -23,10 +22,20 @@ namespace Application.Service
       if (createOrder.BookIds != null && createOrder.BookIds.Any())
       {
         var books = await _repository.Book.GetBooksByIds(createOrder.BookIds, trackChanges: true);
-        order.Books = books.ToList();
+        order.OrdBooks = new List<OrdBook>();
+        foreach (var book in books) 
+        {
+          OrdBook ordBook = new OrdBook()
+          {
+            Id = Guid.NewGuid(),
+            OrderId = order.Id,
+            BookId = book.Id,
+          };  
+          order.OrdBooks.Add(ordBook);
+        }
       }
       _repository.Order.CreateOrder(order);
-      await _repository.SaveAsync();
+      _repository.Save();
       return order.Adapt<OrderDTO>();
     }
 
@@ -36,7 +45,7 @@ namespace Application.Service
       if (order == null)
         throw new KeyNotFoundException($"Order with id {Id} not found.");
       _repository.Order.DeleteOrder(order);
-      await _repository.SaveAsync();
+      _repository.Save();
     }
 
     public async Task<IEnumerable<OrderDTO>> GetAllOrders(string? name, DateTime? orderDate, bool trackChanges)
@@ -59,7 +68,7 @@ namespace Application.Service
         throw new KeyNotFoundException($"Order with id {Id} not found.");
       updateOrder.Adapt(order);
       _repository.Order.UpdateOrder(order);
-      await _repository.SaveAsync();
+      _repository.Save();
     }
   }
 }

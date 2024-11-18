@@ -4,5 +4,6 @@
   {
     IBookService BookService { get; }
     IOrderService OrderService { get; }
+    IOrdBookService OrdBookService { get; }
   }
 }
