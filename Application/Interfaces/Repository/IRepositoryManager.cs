@@ -10,6 +10,8 @@ namespace Application.Interfaces.Repository
   {
     IBookRepository Book { get; }
     IOrderRepository Order { get; }
+    IOrdBookRepository OrdBook { get; }
     Task SaveAsync();
+    void Save();
   }
 }

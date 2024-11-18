@@ -1,8 +1,7 @@
-﻿namespace Domain.Models
+﻿namespace Application.DTO
 {
-  public class Book
+  public class CreateBookDTO
   {
-    public Guid Id { get; set; }
     public string ISBN { get; set; }
     public string Name { get; set; }
     public string Jenre { get; set; }

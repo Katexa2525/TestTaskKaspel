@@ -14,39 +14,37 @@ namespace TestTaskKaspelAn.Controllers
       _serviceManager = serviceManager;
     }
 
-    [HttpGet]
-    public async Task<ActionResult> GetAllBooks([FromQuery] bool trackChanges = false)
+    [HttpGet("filter")]
+    public async Task<ActionResult> GetAllBooks([FromQuery] string? name, [FromQuery] int? year)
     {
-      var books = await _serviceManager.BookService.GetAllBooks(trackChanges);
+      var books = await _serviceManager.BookService.GetAllBooks(name, year, trackChanges: true);
       return Ok(books);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetBookById(Guid Id, [FromQuery] bool trackChanges = false)
+    [HttpGet("{Id}")]
+    public async Task<IActionResult> GetBookById(Guid Id)
     {
-        var book = await _serviceManager.BookService.GetBookById(Id, trackChanges);
+        var book = await _serviceManager.BookService.GetBookById(Id, trackChanges: true);
         return Ok(book);
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateBook([FromBody] CreateUpdateBookDTO createBook, bool trackChanges = false)
+    public async Task<IActionResult> CreateBook([FromBody] CreateBookDTO createBook)
     {
-      var createdBook = await _serviceManager.BookService.CreateBook(createBook, trackChanges);
+      var createdBook = await _serviceManager.BookService.CreateBook(createBook, trackChanges: true);
       return CreatedAtAction(nameof(GetBookById), new { id = createdBook.Id }, createdBook);
     }
 
     [HttpDelete("{Id}")]
     public async Task<IActionResult> DeleteBook(Guid Id)
     {
-      await _serviceManager.BookService.DeleteBook(Id, trackChanges: false);
+      await _serviceManager.BookService.DeleteBook(Id, trackChanges: true);
       return NoContent();
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateBook(Guid Id, [FromBody] CreateUpdateBookDTO updateBook)
+    [HttpPut("{Id}")]
+    public async Task<IActionResult> UpdateBook(Guid Id, [FromBody] UpdateBookDTO updateBook)
     {
-      if (updateBook == null)
-        return BadRequest("Book data is null.");
       await _serviceManager.BookService.UpdateBook(Id, updateBook, trackChanges: true);
       return NoContent();
     }

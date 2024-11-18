@@ -1,4 +1,12 @@
 ﻿namespace Application.DTO
 {
-  public record BookDTO(Guid Id, string ISBN, string Name, string Jenre, string Author);
+  public class BookDTO
+  {
+    public Guid Id { get; set; }
+    public string ISBN { get; set; }
+    public string Name { get; set; }
+    public string Jenre { get; set; }
+    public string Author { get; set; }
+    public int Year { get; set; }
+  }
 }
