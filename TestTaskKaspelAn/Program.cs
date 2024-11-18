@@ -11,7 +11,7 @@ builder.Services.ConfigureMySqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.AddAuthentication();
-//builder.Services.ConfigureValidator();
+builder.Services.ConfigureValidator();
 
 //builder.Services.AddValidatorsFromAssembly(typeof(Application.AssemblyReference).Assembly);
 

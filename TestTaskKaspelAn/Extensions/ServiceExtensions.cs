@@ -1,6 +1,9 @@
 ﻿using Application.Interfaces.Repository;
 using Application.Interfaces.Service;
 using Application.Service;
+using Application.Validation;
+using Domain.Models;
+using FluentValidation;
 using Infrastructure;
 using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -30,13 +33,12 @@ namespace TestTaskKaspelAn.Extensions
     public static void ConfigureServiceManager(this IServiceCollection services) =>
       services.AddScoped<IServiceManager, ServiceManager>();
 
-    //public static void ConfigureValidator(this IServiceCollection services)
-    //{
-    //  //services.AddFluentValidationAutoValidation();
-    //  services.AddScoped<IValidator<Book>, BookValidator>();
-    //  services.AddScoped<IValidator<Author>, AuthorValidator>();
-    //  services.AddScoped<IValidator<UserBook>, UserBookValidation>();
-    //}
+    public static void ConfigureValidator(this IServiceCollection services)
+    {
+      //services.AddFluentValidationAutoValidation();
+      services.AddScoped<IValidator<Book>, BookValidator>();
+      services.AddScoped<IValidator<Order>, OrderValidator>();
+    }
 
   }
 }
