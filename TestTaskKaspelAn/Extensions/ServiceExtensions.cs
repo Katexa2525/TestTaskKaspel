@@ -1,4 +1,5 @@
-﻿using Application.Interfaces.Repository;
+﻿using Application.DTO;
+using Application.Interfaces.Repository;
 using Application.Interfaces.Service;
 using Application.Service;
 using Application.Validation;
@@ -38,6 +39,11 @@ namespace TestTaskKaspelAn.Extensions
       //services.AddFluentValidationAutoValidation();
       services.AddScoped<IValidator<Book>, BookValidator>();
       services.AddScoped<IValidator<Order>, OrderValidator>();
+
+      services.AddScoped<IValidator<CreateBookDTO>, CreateBookValidator>();
+      services.AddScoped<IValidator<CreateOrderDTO>, CreateOrderValidator>();
+      services.AddScoped<IValidator<UpdateBookDTO>, UpdateBookValidator>();
+      services.AddScoped<IValidator<UpdateOrderDTO>, UpdateOrderValidator>();
     }
 
   }

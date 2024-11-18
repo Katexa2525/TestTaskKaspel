@@ -20,9 +20,17 @@ namespace Infrastructure.Repository
       Delete(order);
     }
 
-    public async Task<IEnumerable<Order>> GetAllOrders(bool trackChanges)
+    public async Task<IEnumerable<Order>> GetAllOrders(string? name, DateTime? orderDate, bool trackChanges)
     {
-      return await FindAll(trackChanges).Include(o => o.Books).ToListAsync();
+      var query = FindAll(trackChanges);
+
+      if (!string.IsNullOrWhiteSpace(name))
+        query = query.Where(order => order.Name.Contains(name));
+
+      if (orderDate.HasValue)
+        query = query.Where(order => order.OrderDate.Date == orderDate.Value.Date);
+
+      return await query.ToListAsync();
     }
 
     public async Task<Order> GetOrderById(Guid Id, bool trackChanges)

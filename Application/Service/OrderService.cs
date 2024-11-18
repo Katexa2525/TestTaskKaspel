@@ -3,6 +3,7 @@ using Application.Interfaces.Repository;
 using Application.Interfaces.Service;
 using Domain.Models;
 using Mapster;
+using System.Xml.Linq;
 
 namespace Application.Service
 {
@@ -32,9 +33,9 @@ namespace Application.Service
       await _repository.SaveAsync();
     }
 
-    public async Task<IEnumerable<OrderDTO>> GetAllOrders(bool trackChanges)
+    public async Task<IEnumerable<OrderDTO>> GetAllOrders(string? name, DateTime? orderDate, bool trackChanges)
     {
-      var orders = await _repository.Order.GetAllOrders(trackChanges);
+      var orders = await _repository.Order.GetAllOrders(name, orderDate, trackChanges);
       return orders.Adapt<IEnumerable<OrderDTO>>();
     }
 

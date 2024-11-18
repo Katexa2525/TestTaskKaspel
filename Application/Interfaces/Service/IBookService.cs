@@ -4,7 +4,7 @@ namespace Application.Interfaces.Service
 {
   public interface IBookService
   {
-    Task<IEnumerable<BookDTO>> GetAllBooks(bool trackChanges);
+    Task<IEnumerable<BookDTO>> GetAllBooks(string? name, DateTime? year, bool trackChanges);
     Task<BookDTO> GetBookById(Guid Id, bool trackChanges);
     Task<BookDTO> CreateBook(CreateBookDTO createBook, bool trackchanges);
     Task DeleteBook(Guid Id, bool trackChanges);

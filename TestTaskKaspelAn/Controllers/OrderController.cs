@@ -14,10 +14,10 @@ namespace TestTaskKaspelAn.Controllers
       _serviceManager = serviceManager;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAllOrders()
+    [HttpGet("filter")]
+    public async Task<IActionResult> GetAllOrders([FromQuery] string? name, [FromQuery] DateTime? orderDate, [FromQuery] bool trackChanges = false)
     {
-      var orders = await _serviceManager.OrderService.GetAllOrders(trackChanges: false);
+      var orders = await _serviceManager.OrderService.GetAllOrders(name, orderDate, trackChanges);
       return Ok(orders);
     }
 

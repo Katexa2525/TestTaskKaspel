@@ -4,7 +4,7 @@ namespace Application.Interfaces.Service
 {
   public interface IOrderService
   {
-    Task<IEnumerable<OrderDTO>> GetAllOrders(bool trackChanges);
+    Task<IEnumerable<OrderDTO>> GetAllOrders(string? name, DateTime? orderDate, bool trackChanges);
     Task<OrderDTO> GetOrderById(Guid Id, bool trackChanges);
     Task<OrderDTO> CreateOrder(CreateOrderDTO createOrder);
     Task UpdateOrder(Guid Id, UpdateOrderDTO updateOrder, bool trackChanges);

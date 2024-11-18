@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces.Repository;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace Infrastructure.Repository
 {
@@ -25,7 +26,18 @@ namespace Infrastructure.Repository
       Update(book);
     }
 
-    public async Task<IEnumerable<Book>> GetAllBooks(bool trackChanges) => await FindAll(trackChanges).OrderBy(c=>c.Name).ToListAsync();
+    public async Task<IEnumerable<Book>> GetAllBooks(string? name, DateTime? year, bool trackChanges)
+    {
+      var query = FindAll(trackChanges);
+
+      if (!string.IsNullOrWhiteSpace(name))
+        query = query.Where(book => book.Name.Contains(name));
+
+      if (year.HasValue)
+        query = query.Where(book => book.Year.Date == year.Value.Date);
+
+      return await query.ToListAsync();
+    }
 
     public async Task<Book> GetBookById(Guid Id, bool trackChanges) => await FindByCondition(book => book.Id.Equals(Id), trackChanges).SingleOrDefaultAsync();
 

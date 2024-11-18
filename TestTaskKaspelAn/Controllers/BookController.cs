@@ -14,10 +14,10 @@ namespace TestTaskKaspelAn.Controllers
       _serviceManager = serviceManager;
     }
 
-    [HttpGet]
-    public async Task<ActionResult> GetAllBooks([FromQuery] bool trackChanges = false)
+    [HttpGet("filter")]
+    public async Task<ActionResult> GetAllBooks([FromQuery] string? name, [FromQuery] DateTime? year, [FromQuery] bool trackChanges = false)
     {
-      var books = await _serviceManager.BookService.GetAllBooks(trackChanges);
+      var books = await _serviceManager.BookService.GetAllBooks(name, year, trackChanges);
       return Ok(books);
     }
 
@@ -51,7 +51,7 @@ namespace TestTaskKaspelAn.Controllers
       return NoContent();
     }
 
-    [HttpPost]
+    [HttpPost("{orderId}")]
     public async Task<IActionResult> CreateBookForOrder(Guid orderId, [FromBody] CreateBookDTO createBook)
     {
       //if (createBook == null)

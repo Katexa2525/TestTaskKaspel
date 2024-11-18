@@ -52,9 +52,9 @@ namespace Application.Service
       await _repository.SaveAsync();
     }
 
-    public async Task<IEnumerable<BookDTO>> GetAllBooks(bool trackChanges)
+    public async Task<IEnumerable<BookDTO>> GetAllBooks(string? name, DateTime? year, bool trackChanges)
     {
-      var books = await _repository.Book.GetAllBooks(trackChanges);
+      var books = await _repository.Book.GetAllBooks(name, year, trackChanges);
       return books.Adapt<IEnumerable<BookDTO>>();
     }
 

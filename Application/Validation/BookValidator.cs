@@ -9,7 +9,7 @@ namespace Application.Validation
     {
       RuleFor(book => book.ISBN)
           .NotEmpty().WithMessage("ISBN is required.")
-          .Length(5, 10).WithMessage("ISBN must be between 10 and 13 characters.");
+          .Length(5, 10).WithMessage("ISBN must be between 5 and 10 characters.");
 
       RuleFor(book => book.Name)
           .NotEmpty().WithMessage("Book name is required.")
