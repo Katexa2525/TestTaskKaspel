@@ -24,11 +24,12 @@ namespace Application.Validation
           .MaximumLength(100).WithMessage("Author must not exceed 100 characters.");
 
       RuleFor(book => book.Year)
-          .NotEmpty().WithMessage("Year is required.")
-          .LessThanOrEqualTo(DateTime.Now).WithMessage("Year cannot be in the future.");
+            .NotEmpty()
+            .InclusiveBetween(1500, DateTime.Now.Year)
+            .WithMessage($"Year must be between 1500 and {DateTime.Now.Year}.");
 
-      RuleFor(book => book.OrderId)
-          .NotEmpty().WithMessage("OrderId is required.");
+      //RuleFor(book => book.OrderId)
+      //    .NotEmpty().WithMessage("OrderId is required.");
     }
   }
 }

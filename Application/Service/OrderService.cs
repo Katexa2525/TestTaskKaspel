@@ -19,6 +19,11 @@ namespace Application.Service
     public async Task<OrderDTO> CreateOrder(CreateOrderDTO createOrder)
     {
       var order = createOrder.Adapt<Order>();
+      if (createOrder.BookIds != null && createOrder.BookIds.Any())
+      {
+        var books = await _repository.Book.GetBooksByIds(createOrder.BookIds, trackChanges: false);
+        order.Books = books.ToList();
+      }
       _repository.Order.CreateOrder(order);
       await _repository.SaveAsync();
       return order.Adapt<OrderDTO>();
@@ -38,7 +43,6 @@ namespace Application.Service
       var orders = await _repository.Order.GetAllOrders(name, orderDate, trackChanges);
       return orders.Adapt<IEnumerable<OrderDTO>>();
     }
-
     public async Task<OrderDTO> GetOrderById(Guid Id, bool trackChanges)
     {
       var order = await _repository.Order.GetOrderById(Id, trackChanges);

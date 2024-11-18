@@ -23,7 +23,9 @@ namespace Application.Validation
           .MaximumLength(50).WithMessage("Author name must not exceed 50 characters.");
 
       RuleFor(book => book.Year)
-          .LessThanOrEqualTo(DateTime.Now).WithMessage("Year must not be in the future.");
+            .NotEmpty()
+            .InclusiveBetween(1500, DateTime.Now.Year)
+            .WithMessage($"Year must be between 1500 and {DateTime.Now.Year}.");
 
       RuleFor(book => book.OrderId)
           .NotEmpty().WithMessage("Order ID is required.");

@@ -15,7 +15,7 @@ namespace Application.Service
       _repository = repository;
     }
 
-    public async Task<BookDTO> CreateBook(CreateBookDTO createBook, bool trackchanges)
+    public async Task<BookDTO> CreateBook(CreateBookDTO createBook, bool trackChanges)
     {
       var book = createBook.Adapt<Book>();
       _repository.Book.CreateBook(book);
@@ -52,7 +52,7 @@ namespace Application.Service
       await _repository.SaveAsync();
     }
 
-    public async Task<IEnumerable<BookDTO>> GetAllBooks(string? name, DateTime? year, bool trackChanges)
+    public async Task<IEnumerable<BookDTO>> GetAllBooks(string? name, int? year, bool trackChanges)
     {
       var books = await _repository.Book.GetAllBooks(name, year, trackChanges);
       return books.Adapt<IEnumerable<BookDTO>>();

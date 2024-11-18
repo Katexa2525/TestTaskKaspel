@@ -22,14 +22,15 @@ namespace Infrastructure.Repository
 
     public async Task<IEnumerable<Order>> GetAllOrders(string? name, DateTime? orderDate, bool trackChanges)
     {
-      var query = FindAll(trackChanges);
-
+      var query = (IQueryable<Order>)FindAll(trackChanges).Include(order => order.Books);
       if (!string.IsNullOrWhiteSpace(name))
+      {
         query = query.Where(order => order.Name.Contains(name));
-
+      }
       if (orderDate.HasValue)
+      {
         query = query.Where(order => order.OrderDate.Date == orderDate.Value.Date);
-
+      }
       return await query.ToListAsync();
     }
 

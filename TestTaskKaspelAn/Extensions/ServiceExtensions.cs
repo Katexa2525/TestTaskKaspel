@@ -25,7 +25,9 @@ namespace TestTaskKaspelAn.Extensions
 
     public static void ConfigureMySqlContext(this IServiceCollection services, IConfiguration configuration)
     {
-      services.AddDbContext<RepositoryContext>(opts => opts.UseMySQL(configuration.GetConnectionString("MySqlConnection")));
+      services.AddDbContext<RepositoryContext>(opts => opts.UseMySql(configuration.GetConnectionString("MySqlConnection"),
+                   ServerVersion.AutoDetect(configuration.GetConnectionString("MySqlConnection"))));
+      //services.AddDbContext<RepositoryContext>();
     }
 
     public static void ConfigureRepositoryManager(this IServiceCollection services) =>

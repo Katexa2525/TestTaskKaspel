@@ -24,8 +24,9 @@ namespace Application.Validation
           .When(book => !string.IsNullOrEmpty(book.Author));
 
       RuleFor(book => book.Year)
-          .LessThanOrEqualTo(DateTime.Now).WithMessage("Year cannot be in the future.")
-          .When(book => book.Year != default);
+            .InclusiveBetween(1500, DateTime.Now.Year)
+            .WithMessage($"Year must be between 1500 and {DateTime.Now.Year}.")
+            .When(book => book.Year > 0);
     }
   }
 }

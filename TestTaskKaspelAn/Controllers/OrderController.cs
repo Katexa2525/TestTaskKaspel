@@ -15,9 +15,9 @@ namespace TestTaskKaspelAn.Controllers
     }
 
     [HttpGet("filter")]
-    public async Task<IActionResult> GetAllOrders([FromQuery] string? name, [FromQuery] DateTime? orderDate, [FromQuery] bool trackChanges = false)
+    public async Task<IActionResult> GetAllOrders([FromQuery] string? name, [FromQuery] DateTime? orderDate)
     {
-      var orders = await _serviceManager.OrderService.GetAllOrders(name, orderDate, trackChanges);
+      var orders = await _serviceManager.OrderService.GetAllOrders(name, orderDate, trackChanges: false);
       return Ok(orders);
     }
 

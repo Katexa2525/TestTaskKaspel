@@ -26,7 +26,7 @@ namespace Infrastructure.Repository
       Update(book);
     }
 
-    public async Task<IEnumerable<Book>> GetAllBooks(string? name, DateTime? year, bool trackChanges)
+    public async Task<IEnumerable<Book>> GetAllBooks(string? name, int? year, bool trackChanges)
     {
       var query = FindAll(trackChanges);
 
@@ -34,8 +34,18 @@ namespace Infrastructure.Repository
         query = query.Where(book => book.Name.Contains(name));
 
       if (year.HasValue)
-        query = query.Where(book => book.Year.Date == year.Value.Date);
+        query = query.Where(book => book.Year == year.Value);
 
+      return await query.ToListAsync();
+    }
+
+    public async Task<IEnumerable<Book>> GetBooksByIds(IEnumerable<Guid> bookIds, bool trackChanges)
+    {
+      var query = FindAll(trackChanges);
+      if (bookIds != null && bookIds.Any())
+      {
+        query = query.Where(book => bookIds.Contains(book.Id));
+      }
       return await query.ToListAsync();
     }
 

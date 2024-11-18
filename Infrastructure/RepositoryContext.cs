@@ -1,6 +1,6 @@
 ﻿using Domain.Models;
+using Infrastructure.Configuration;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Infrastructure
 {
@@ -13,13 +13,16 @@ namespace Infrastructure
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      base.OnModelCreating(modelBuilder);
-
       modelBuilder.Entity<Order>()
           .HasMany(o => o.Books)
           .WithOne(b => b.Order)
           .HasForeignKey(b => b.OrderId)
           .OnDelete(DeleteBehavior.Cascade);
+
+      modelBuilder.ApplyConfiguration(new BookConfiguration());
+      modelBuilder.ApplyConfiguration(new OrderConfiguration());
+
+      base.OnModelCreating(modelBuilder);
     }
 
     public DbSet<Book>? Books { get; set; }
