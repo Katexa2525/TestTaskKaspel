@@ -2,7 +2,7 @@
 {
   public class OrderDTO
   {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } 
     public string Name { get; set; }
     public int Number { get; set; }
     public DateTime OrderDate { get; set; }

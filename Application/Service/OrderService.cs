@@ -19,9 +19,10 @@ namespace Application.Service
     public async Task<OrderDTO> CreateOrder(CreateOrderDTO createOrder)
     {
       var order = createOrder.Adapt<Order>();
+      order.Id = Guid.NewGuid();
       if (createOrder.BookIds != null && createOrder.BookIds.Any())
       {
-        var books = await _repository.Book.GetBooksByIds(createOrder.BookIds, trackChanges: false);
+        var books = await _repository.Book.GetBooksByIds(createOrder.BookIds, trackChanges: true);
         order.Books = books.ToList();
       }
       _repository.Order.CreateOrder(order);

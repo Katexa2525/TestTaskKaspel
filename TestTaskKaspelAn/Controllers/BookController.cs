@@ -17,28 +17,28 @@ namespace TestTaskKaspelAn.Controllers
     [HttpGet("filter")]
     public async Task<ActionResult> GetAllBooks([FromQuery] string? name, [FromQuery] int? year)
     {
-      var books = await _serviceManager.BookService.GetAllBooks(name, year, trackChanges: false);
+      var books = await _serviceManager.BookService.GetAllBooks(name, year, trackChanges: true);
       return Ok(books);
     }
 
     [HttpGet("{Id}")]
     public async Task<IActionResult> GetBookById(Guid Id)
     {
-        var book = await _serviceManager.BookService.GetBookById(Id, trackChanges: false);
+        var book = await _serviceManager.BookService.GetBookById(Id, trackChanges: true);
         return Ok(book);
     }
 
     [HttpPost]
     public async Task<IActionResult> CreateBook([FromBody] CreateBookDTO createBook)
     {
-      var createdBook = await _serviceManager.BookService.CreateBook(createBook, trackChanges: false);
+      var createdBook = await _serviceManager.BookService.CreateBook(createBook, trackChanges: true);
       return CreatedAtAction(nameof(GetBookById), new { id = createdBook.Id }, createdBook);
     }
 
     [HttpDelete("{Id}")]
     public async Task<IActionResult> DeleteBook(Guid Id)
     {
-      await _serviceManager.BookService.DeleteBook(Id, trackChanges: false);
+      await _serviceManager.BookService.DeleteBook(Id, trackChanges: true);
       return NoContent();
     }
 

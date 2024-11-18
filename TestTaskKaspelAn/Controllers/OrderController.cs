@@ -17,14 +17,14 @@ namespace TestTaskKaspelAn.Controllers
     [HttpGet("filter")]
     public async Task<IActionResult> GetAllOrders([FromQuery] string? name, [FromQuery] DateTime? orderDate)
     {
-      var orders = await _serviceManager.OrderService.GetAllOrders(name, orderDate, trackChanges: false);
+      var orders = await _serviceManager.OrderService.GetAllOrders(name, orderDate, trackChanges: true);
       return Ok(orders);
     }
 
     [HttpGet("{Id:guid}", Name = "GetOrderById")]
     public async Task<IActionResult> GetOrderById(Guid Id)
     {
-      var order = await _serviceManager.OrderService.GetOrderById(Id, trackChanges: false);
+      var order = await _serviceManager.OrderService.GetOrderById(Id, trackChanges: true);
       return Ok(order);
     }
 
@@ -48,7 +48,7 @@ namespace TestTaskKaspelAn.Controllers
     [HttpDelete("{Id:guid}")]
     public async Task<IActionResult> DeleteOrder(Guid Id)
     {
-      await _serviceManager.OrderService.DeleteOrder(Id, trackChanges: false);
+      await _serviceManager.OrderService.DeleteOrder(Id, trackChanges: true);
       return NoContent();
     }
   }
